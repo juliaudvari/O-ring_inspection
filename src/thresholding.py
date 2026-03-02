@@ -4,6 +4,7 @@ import numpy as np
 
 
 def compute_histogram(gray_image: np.ndarray) -> np.ndarray:
+    """Compute a 256-bin histogram for a uint8 grayscale image"""
     if gray_image.ndim != 2:
         raise ValueError("Expected a 2D grayscale image.")
     if gray_image.dtype != np.uint8:
@@ -13,6 +14,7 @@ def compute_histogram(gray_image: np.ndarray) -> np.ndarray:
 
 
 def otsu_threshold(gray_image: np.ndarray) -> tuple[int, np.ndarray]:
+    """Select Otsu threshold using only NumPy"""
     # get image hist
     hist = compute_histogram(gray_image).astype(np.float64)
     total = float(gray_image.size)
@@ -50,6 +52,7 @@ def otsu_threshold(gray_image: np.ndarray) -> tuple[int, np.ndarray]:
 
 
 def apply_threshold(gray_image: np.ndarray, threshold: int) -> np.ndarray:
+    """Threshold image and force O-ring polarity to foreground (True)"""
     # make binary mask
     mask = gray_image <= threshold
     # keep ring as fg

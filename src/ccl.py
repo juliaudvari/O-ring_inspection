@@ -93,3 +93,15 @@ def largest_component(mask: np.ndarray, connectivity: int = 8):
     largest = max(stats, key=lambda item: int(item["area"]))
     largest_mask = labels == int(largest["label"])
     return largest_mask, labels, largest, stats
+
+
+def colorize_labels(labels: np.ndarray) -> np.ndarray:
+    # color map for debug
+    max_label = int(labels.max())
+    if max_label <= 0:
+        return np.zeros((*labels.shape, 3), dtype=np.uint8)
+
+    rng = np.random.default_rng(42)
+    palette = rng.integers(40, 256, size=(max_label + 1, 3), dtype=np.uint8)
+    palette[0] = 0
+    return palette[labels]
