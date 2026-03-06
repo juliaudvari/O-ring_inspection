@@ -3,6 +3,7 @@ from __future__ import annotations
 import numpy as np
 
 
+# Thresholding functions for O-ring segmentation
 def compute_histogram(gray_image: np.ndarray) -> np.ndarray:
     """Compute a 256-bin histogram for a uint8 grayscale image"""
     if gray_image.ndim != 2:
